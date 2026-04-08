@@ -79,3 +79,19 @@ public record MonthlyPnlDto(
 
 // New
 public record DateRangeDto(string MinDate, string MaxDate);
+
+public record StrategyMetricsWithEquityDto(
+    int      StrategyId,
+    string   StrategyName,
+    double   TotalPnl,
+    double   SharpeRatio,
+    double   SortinoRatio,
+    double   MaxDrawdownPct,
+    double   WinRatePct,
+    double   AvgWin,
+    double   AvgLoss,
+    double   ProfitFactor,
+    int      TotalTrades,
+    string   ComputedAt,
+    double[] EquityHistory
+);

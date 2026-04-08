@@ -17,6 +17,11 @@ public class StrategiesController(IStrategyRepository repo) : ControllerBase
     public async Task<IActionResult> GetAllMetrics() =>
         Ok(await repo.GetAllMetricsAsync());
 
+    /// <summary>Returns metrics + equity history array for sparkline rendering.</summary>
+    [HttpGet("metrics-with-equity")]
+    public async Task<IActionResult> GetAllMetricsWithEquity() =>
+        Ok(await repo.GetAllMetricsWithEquityAsync());
+
     /// <summary>Returns metrics for a single strategy by ID.</summary>
     [HttpGet("{id:int}/metrics")]
     public async Task<IActionResult> GetMetrics(int id)

@@ -12,8 +12,8 @@ export default function AppShell({ children }: { children: ReactNode }) {
         component="main"
         sx={{
           flexGrow: 1,
-          ml: '220px',
-          mt: '52px',
+          ml: '225px',
+          mt: '52px', 
           p: 3,
           minHeight: 'calc(100vh - 52px)',
           bgcolor: 'background.default',

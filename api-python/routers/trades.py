@@ -19,7 +19,7 @@ async def get_trades(
     date_to:     Optional[str] = Query(None, alias="dateTo"),
     direction:   Optional[str] = Query(None),
     page:        int           = Query(1,   ge=1),
-    page_size:   int           = Query(100, ge=1, le=500, alias="pageSize"),
+    page_size:   int           = Query(100, ge=1, le=50000, alias="pageSize"),
     db: AsyncSession           = Depends(get_db),
 ):
     conditions = ["1=1"]

@@ -51,7 +51,7 @@ export const theme = createTheme({
     },
     MuiDrawer: {
       styleOverrides: {
-        paper: { background: SURFACE, borderRight: `1px solid ${BORDER}`, width: 220 },
+        paper: { background: SURFACE, borderRight: `1px solid ${BORDER}`, width: 225 },
       },
     },
     MuiAppBar: {

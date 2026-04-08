@@ -12,26 +12,29 @@ import type { TradeFilterParams } from '../types'
 
 const ASSET_CLASSES = ['equity', 'futures', 'forex']
 const DIRECTIONS    = ['Long', 'Short']
+const PAGE_SIZE     = 50   // rows per page — matches AG-Grid paginationPageSize
 
 export default function TradeLog() {
   const { data: metrics } = useStrategyMetrics()
-  const [filters, setFilters] = useState<TradeFilterParams>({ page: 1, pageSize: 200 })
+  const [filters, setFilters] = useState<TradeFilterParams>({ page: 1, pageSize: 10000 })
   const [dateRange, setDateRange] = useState<DateRange | null>(null)
   const { data, loading } = useTrades(filters)
+  const today = new Date().toISOString().split('T')[0]
 
   useEffect(() => {
     tradesApi.getDateRange().then(setDateRange).catch(() => {})
   }, [])
 
+  // Field setter — resets to page 1 whenever a filter changes
   const set = (key: keyof TradeFilterParams) => (e: any) =>
     setFilters((f) => ({ ...f, [key]: e.target.value || undefined, page: 1 }))
 
-  const today = new Date().toISOString().split('T')[0]
 
   return (
     <Box>
       <Typography variant="h3" sx={{ mb: 3 }}>Trade Log</Typography>
 
+      {/* Filter bar */}
       <Card sx={{ mb: 2 }}>
         <CardContent sx={{ py: '12px !important' }}>
           <Stack direction="row" spacing={1.5} flexWrap="wrap" gap={1}>
@@ -56,7 +59,6 @@ export default function TradeLog() {
               value={filters.dateFrom ?? dateRange?.minDate ?? ''}
               onChange={set('dateFrom')}
             />
-
             <TextField
               size="small" type="date" label="To"
               InputLabelProps={{ shrink: true }}
@@ -67,15 +69,14 @@ export default function TradeLog() {
         </CardContent>
       </Card>
 
-      <Typography variant="body2" sx={{ mb: 1.5 }}>
-        {data.totalCount.toLocaleString()} trades
-        {data.totalPages > 1 && ` · page ${data.page} of ${data.totalPages}`}
-      </Typography>
-
+      {/* Table */}
       <Card>
         <CardContent sx={{ p: '0 !important' }}>
           <SectionHeader title="" />
-          <TradeLogGrid data={data.items} loading={loading} />
+          <TradeLogGrid
+            data={data?.items ?? []}
+            loading={loading}
+          />
         </CardContent>
       </Card>
     </Box>

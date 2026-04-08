@@ -4,6 +4,7 @@ import Overview    from './pages/Overview'
 import Strategies  from './pages/Strategies'
 import TradeLog    from './pages/TradeLog'
 import Performance from './pages/Performance'
+import StrategyDetail from './pages/StrategyDetail'
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
           <Route path="/strategies"  element={<Strategies />}  />
           <Route path="/trades"      element={<TradeLog />}    />
           <Route path="/performance" element={<Performance />} />
+          <Route path="/strategies/:id" element={<StrategyDetail />} />
         </Routes>
       </AppShell>
     </BrowserRouter>

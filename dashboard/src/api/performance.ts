@@ -9,10 +9,10 @@ export const performanceApi = {
       })
       .then((r) => r.data),
 
-  getAssetBreakdown: (dateFrom?: string, dateTo?: string) =>
+  getAssetBreakdown: (strategy?: string, dateFrom?: string, dateTo?: string) =>
     client
       .get<AssetClassBreakdown[]>('/api/performance/asset-breakdown', {
-        params: { dateFrom, dateTo },
+        params: { strategy, dateFrom, dateTo },
       })
       .then((r) => r.data),
 

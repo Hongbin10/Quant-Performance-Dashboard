@@ -23,7 +23,7 @@ export default function Overview() {
     <Box>
       <Typography variant="h3" sx={{ mb: 0.5 }}>Overview</Typography>
       <Typography variant="body2" sx={{ mb: 3 }}>
-        All strategies · live data from backend
+        All strategies · live data from Finnhub API
       </Typography>
 
       <LivePriceTicker />
@@ -39,7 +39,7 @@ export default function Overview() {
           { label: 'Strategies',     value: metrics.length },
         ].map(({ label, value, isPnl }) => (
           <Grid item xs={6} sm={4} md={2} key={label}>
-            <MetricCard label={label} value={value} loading={mLoading} isPnl={isPnl} />
+            <MetricCard label={label} value={value} loading={mLoading} />
           </Grid>
         ))}
       </Grid>
@@ -53,7 +53,7 @@ export default function Overview() {
               <CircularProgress size={28} />
             </Box>
           ) : (
-            <EquityCurveChart data={curves} />
+            <EquityCurveChart data={curves} loading={cLoading} />
           )}
         </CardContent>
       </Card>

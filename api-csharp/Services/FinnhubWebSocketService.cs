@@ -4,19 +4,25 @@ using System.Text.Json;
 
 namespace TradingApi.Services;
 
-/// <summary>
-/// Background service — maintains persistent WebSocket connection to Finnhub.
-/// Subscribes to symbols and publishes price updates via MarketDataBroadcaster.
-/// </summary>
 public class FinnhubWebSocketService : BackgroundService
 {
     private readonly ILogger<FinnhubWebSocketService> _logger;
     private readonly IConfiguration _config;
     private readonly MarketDataBroadcaster _broadcaster;
 
+    // Mirrors LivePriceTicker.tsx — two groups matching QRT's trading universe
     private static readonly string[] Symbols =
     [
-        "AAPL", "MSFT", "GOOGL", "NVDA", "AMZN", "META",
+    // Market Overview — 24h real-time via Finnhub free tier
+        "BINANCE:BTCUSDT",  // Risk sentiment proxy (correlated with Nasdaq)
+        "BINANCE:ETHUSDT",  // Risk sentiment proxy
+        "OANDA:USD_JPY",    // Safe-haven proxy (JPY strengthens when VIX rises)
+        "OANDA:BCO_USD",    // Brent Crude — QRT commodity focus
+        "OANDA:XAU_USD",    // Gold — macro hedge
+        "OANDA:EUR_USD",    // EUR/USD
+
+    // Key Equities
+        "AAPL", "MSFT", "NVDA", "AMZN", "META", "GOOGL",
     ];
 
     public FinnhubWebSocketService(
@@ -48,8 +54,8 @@ public class FinnhubWebSocketService : BackgroundService
         var apiKey = _config["Finnhub:ApiKey"]
             ?? throw new InvalidOperationException("Finnhub:ApiKey not set in appsettings.json");
 
-        using var ws  = new ClientWebSocket();
-        var uri       = new Uri($"wss://ws.finnhub.io?token={apiKey}");
+        using var ws = new ClientWebSocket();
+        var uri      = new Uri($"wss://ws.finnhub.io?token={apiKey}");
 
         _logger.LogInformation("Connecting to Finnhub…");
         await ws.ConnectAsync(uri, ct);

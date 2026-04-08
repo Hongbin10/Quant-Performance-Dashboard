@@ -19,6 +19,7 @@ export interface StrategyMetrics {
   profitFactor:   number
   totalTrades:    number
   computedAt:     string
+  equityHistory:  number[]   // daily cumulative PnL array for sparkline
 }
 
 export interface Trade {

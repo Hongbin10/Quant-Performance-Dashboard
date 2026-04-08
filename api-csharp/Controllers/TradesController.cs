@@ -14,7 +14,7 @@ public class TradesController(ITradeRepository repo) : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetTrades([FromQuery] TradeFilterParams filters)
     {
-        if (filters.PageSize > 500)
+        if (filters.PageSize > 50000)
             return BadRequest("pageSize cannot exceed 500.");
 
         var result = await repo.GetTradesAsync(filters);
