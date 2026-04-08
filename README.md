@@ -1,4 +1,4 @@
-# Trading Performance Dashboard
+# Quant Performance Dashboard
 
 A full-stack quantitative trading analytics platform built to simulate the internal reporting tools used at systematic investment firms. Delivers daily trading insights across **5 strategies** and **18 asset classes** (equity, futures, forex) with **2,933 real-market trades** sourced from Yahoo Finance (2020–2024) — and live market prices streamed via Finnhub WebSocket.
 
@@ -133,7 +133,7 @@ A persistent upstream WebSocket connection to Finnhub is maintained by a .NET `B
 ## Project Structure
 
 ```
-trading-performance-dashboard/
+Quant-performance-dashboard/
 ├── dashboard/                  # React frontend
 │   └── src/
 │       ├── api/                # Axios client + endpoint modules
