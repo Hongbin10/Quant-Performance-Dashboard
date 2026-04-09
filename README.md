@@ -2,7 +2,15 @@
 
 A full-stack quantitative trading analytics platform built to simulate the internal reporting tools used at systematic investment firms. Delivers daily trading insights across **5 strategies** and **18 asset classes** (equity, futures, forex) with **2,933 real-market trades** sourced from Yahoo Finance (2020–2024) — and live market prices streamed via Finnhub WebSocket.
 
-**Live Demo:** [your-demo-url.com](https://your-demo-url.com) &nbsp;|&nbsp; **Tech stack:** C# · Python · React · MUI · AG-Grid · ECharts · PostgreSQL
+## Live Demo
+
+**[→ Open Live Demo](https://hongbin10.github.io/Quant-Performance-Dashboard/)**
+A fully interactive quantitative performance dashboard with:
+- **Tech stack:** C# · Python · React · MUI · AG-Grid · ECharts · PostgreSQL
+- Real-time price ticker (simulated + Finnhub)
+- Multi-strategy equity curves with ECharts
+- AG-Grid powered metrics table with custom sparklines
+- Full trade log with advanced filtering
 
 ---
 
